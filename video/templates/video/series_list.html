@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+
+{% block header %}
+צפיה בסרטים
+{% endblock %}
+
+
+{% block content %}
+    <div class="row">
+        {% for series in object_list %}
+            <div class="col-xs-6 col-sm-3 col-md-2">
+                <div class="thumbnail" style="height: 180px; overflow: hidden">
+                    <a href="{{ series.get_absolute_url }}" class="btn btn-primary">
+                        <img src="{{ series.thumbnail }}" width="120" height="90" alt="...">
+                    </a>
+
+                    <div class="caption">
+                        {{ series.name}}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

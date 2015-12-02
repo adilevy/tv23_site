@@ -16,6 +16,12 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+import video.views
+
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    # url(r'^r/',video.views.view_random_video),
+    url(r'^(?P<pk>\d+)/$',video.views.AssetDetailView.as_view(),name="video"),
+    url(r'^$',video.views.AssetListView.as_view(),name="home"),
+    url(r'^s/$',video.views.SeriesListView.as_view(),name="series_list"),
 ]

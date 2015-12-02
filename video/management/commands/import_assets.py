@@ -19,34 +19,40 @@ class Command(BaseCommand):
         self.stdout.write("{} assets found.".format(len(assets)))
 
         for asset in assets:
-            self.import_asset(asset)
+            try :
+                self.import_asset(asset)
+            except Exception as e:
+                print(e)
 
     def import_asset(self, asset):
-        self.stdout.write(asset['title'])
+        genres= [models.Genre.objects.get_or_create(name=genere_name)[0] for genere_name in asset['genres']]
 
-        pprint(asset)
         series, created = models.Series.objects.get_or_create(
             name=asset['series']
         )
-        if created:
-            self.stdout.write("Series #{} created: {}".format(
-                series.id, series.name
-            ))
+
+        season = models.Season.objects.get_or_create(
+            series = series,
+            year = asset['year'] or 1
+        )
+        try:
+            episode = int(asset['episode']) or 999999
+        except Exception:
+            episode = 999999
 
         o = models.Asset.objects.create(
-            # system_id=None,
-            # year=None,
+            system_id=asset['system_id'],
+            year=asset['year'] or 1,
             series=series,
-            # episode=None,
+            episode=episode,
             title=asset['title'],
-            # full_name=None,
-            # language=None,
-            # synopsys=None,
-            # audience=None,
-            # genres=None,
-            # primo_url=None,
-            # thumbnail_url=None,
-            # entry_id=None,
-            # video_url=None,
-            # clean_records=None,
+            full_name=asset['full_name'],
+            language=asset['language'],
+            synopsys=asset['synopsys'],
+            audience=asset['audience'],
+            primo_url=asset['primo_url'],
+            thumbnail_url=asset['thumbnail_url'],
+            entry_id=asset['entry_id'],
+            video_url=asset['video_url'],
         )
+        o.genres.add(*genres)

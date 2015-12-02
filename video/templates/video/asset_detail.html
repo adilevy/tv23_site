@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+
+{% block header %}
+    נגן וידאו
+{% endblock %}
+
+
+{% block content %}
+
+
+    <p>
+        שם?:
+        {{ object.full_name }}
+    </p>
+    <p>
+        פרק:
+        {{ object.episdoe }}
+    </p>
+    <p>
+        ז'אנר
+        {{ object.genres }}
+
+    </p>
+{#    <iframe src='{{ object.video_url }}' style='overflow:hidden;height:480px;width:640px'></iframe>#}
+    <div class="embed-responsive embed-responsive-4by3">
+        <iframe src='{{ object.video_url }}' class="embed-responsive-item"></iframe>
+    </div>
+
+
+{% endblock %}
+

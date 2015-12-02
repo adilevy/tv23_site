@@ -31,7 +31,7 @@ class Command(BaseCommand):
             name=asset['series']
         )
 
-        season = models.Season.objects.get_or_create(
+        season,created = models.Season.objects.get_or_create(
             series = series,
             year = asset['year'] or 1
         )
@@ -44,6 +44,7 @@ class Command(BaseCommand):
             system_id=asset['system_id'],
             year=asset['year'] or 1,
             series=series,
+            season = season,
             episode=episode,
             title=asset['title'],
             full_name=asset['full_name'],

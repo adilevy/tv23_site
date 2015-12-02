@@ -20,15 +20,23 @@ class Series(models.Model):
         return self.name
     def thumbnail(self):
         return self.asset_set.first().thumbnail_url
+    def get_absolute_url(self):
+        return reverse("series",args=(self.id,))
 
 
 
 class Season(models.Model):
     series = models.ForeignKey(Series)
     year = models.SmallIntegerField(null=True)
+
     def __str__(self):
-        return self.year
-    '''todo : add link to image   '''
+        return str(self.year)
+
+    def get_ordered_assets(self):
+        return self.asset_set.order_by("episode")
+
+    def get_absolute_url(self):
+        return reverse("season",args=(self.id,))
 
 
 

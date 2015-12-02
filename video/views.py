@@ -10,13 +10,6 @@ from . import models
 # Create your views here.
 from django.views.generic.base import View
 
-
-
-
-
-
-
-
 class AssetDetailView(DetailView):
     model = models.Asset
 
@@ -27,6 +20,13 @@ class AssetListView(ListView):
 
 class SeriesListView(ListView):
     model = models.Series
+
+class SeriesDetailView(DetailView):
+    model = models.Series
+
+class SeasonDetailView(DetailView):
+    model = models.Season
+
 
 
 

@@ -16,10 +16,12 @@ class AssetDetailView(DetailView):
 class AssetListView(ListView):
     model = models.Asset
     paginate_by = 36
-    queryset = models.Asset.objects.order_by("?")
+    queryset = models.Asset.objects.order_by("name")
 
 class SeriesListView(ListView):
     model = models.Series
+    paginate_by = 36
+    queryset = models.Series.objects.order_by("name")
 
 class SeriesDetailView(DetailView):
     model = models.Series

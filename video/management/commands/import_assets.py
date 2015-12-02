@@ -57,3 +57,4 @@ class Command(BaseCommand):
             video_url=asset['video_url'],
         )
         o.genres.add(*genres)
+        o.save()

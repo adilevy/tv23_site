@@ -3,7 +3,7 @@
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.8/topics/http/urls/
 Examples:
-Function views
+Function viewsb
     1. Add an import:  from my_app import views
     2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
 Class-based views
@@ -16,6 +16,15 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+import video.views
+
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    # url(r'^r/',video.views.view_random_video),
+    url(r'^(?P<pk>\d+)/$',video.views.AssetDetailView.as_view(),name="video"),
+    url(r'^$',video.views.AssetListView.as_view(),name="home"),
+    url(r'^ser/$',video.views.SeriesListView.as_view(),name="series_list"),
+    url(r'^ser/(?P<pk>\d+)$',video.views.SeriesDetailView.as_view(),name="series"),
+    url(r'^sea/(?P<pk>\d+)$',video.views.SeasonDetailView.as_view(),name="season"),
+
 ]

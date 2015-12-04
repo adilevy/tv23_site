@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+
+{% block header %}
+עונה
+
+{% endblock %}
+
+
+{% block content %}
+
+
+    <p>
+שם
+        {{ object.name }}
+    </p>
+
+    {#    <iframe src='{{ object.video_url }}' style='overflow:hidden;height:480px;width:640px'></iframe>#}
+        <div class="row">
+        {% for asset in object.get_ordered_assets %}
+            <div class="col-xs-6 col-sm-3 col-md-2">
+                <div class="thumbnail" style="height: 180px; overflow: hidden">
+                    <a href="{{ asset.get_absolute_url }}" >
+                        <img src="{{ asset.thumbnail_url }}" width="120" height="90" alt="...">
+                    </a>
+
+                    <div class="caption">
+                        {{ asset.full_name }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+
+{% endblock %}
+

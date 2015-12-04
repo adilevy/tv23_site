@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+
+{% block header %}
+    נגן וידאו
+{% endblock %}
+
+
+{% block content %}
+
+
+    <p>
+        שם?:
+        {{ object.name }}
+    </p>
+
+    {#    <iframe src='{{ object.video_url }}' style='overflow:hidden;height:480px;width:640px'></iframe>#}
+    <list>
+        {% for season in object.season_set.all %}
+            <a href="{{ season.get_absolute_url }}">
+                <li>
+                    {{ season.year }}
+                </li>
+            </a>
+        {% endfor %}
+    </list>
+
+
+{% endblock %}
+
